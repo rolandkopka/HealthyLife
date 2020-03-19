@@ -5,6 +5,6 @@ namespace HealthyLife.Data
 {
     public class FoodContext : DbContext
     {
-        public DbSet<Ingredient> MyProperty { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
     }
 }
