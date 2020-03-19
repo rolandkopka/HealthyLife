@@ -8,5 +8,9 @@
     <Folder Include="Controllers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HealthyLife.Data\HealthyLife.Data.csproj" />
+  </ItemGroup>
+
 
 </Project>
