@@ -17,9 +17,12 @@ namespace HealthyLife.API
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IWebHostEnvironment _env;
+
+        public Startup(IConfiguration configuration, IWebHostEnvironment env)
         {
             Configuration = configuration;
+            _env = env;
         }
 
         public IConfiguration Configuration { get; }
@@ -28,14 +31,19 @@ namespace HealthyLife.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
-            services.AddDbContext<FoodContext>(opt =>
-                opt.UseSqlServer(Configuration.GetConnectionString("FoodConnex")));
+
+            if (_env.IsDevelopment())
+            {
+                services.AddDbContext<FoodContext>(opt =>
+                opt.UseSqlServer(Configuration.GetConnectionString("FoodConnex"))
+                   .EnableSensitiveDataLogging());
+            }
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app)
         {
-            if (env.IsDevelopment())
+            if (_env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
