@@ -1,0 +1,27 @@
+﻿@page "/ingredients"
+@inject HttpClient Http 
+
+<h3>Ingredients</h3>
+
+@if (ingredients == null)
+{
+    <p>Loading...</p>
+}
+else
+{
+    <ol>
+        @foreach (var ingredient in ingredients)
+        {
+            <li>@ingredient.Name</li>
+        }
+    </ol>
+}
+
+@code {
+    private Ingredient[] ingredients;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ingredients = await Http.GetJsonAsync<Ingredient[]>("https://localhost:5001/api/ingredients");
+    }
+}

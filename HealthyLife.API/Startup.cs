@@ -52,6 +52,8 @@ namespace HealthyLife.API
 
             app.UseRouting();
 
+            app.UseCors(options => options.AllowAnyOrigin());
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
