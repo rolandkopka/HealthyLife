@@ -7,7 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.API", "HealthyL
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Domain", "HealthyLife.Domain\HealthyLife.Domain.csproj", "{88364A08-3CC2-418A-90BE-ACB9679CED71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyLife.Data", "HealthyLife.Data\HealthyLife.Data.csproj", "{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Data", "HealthyLife.Data\HealthyLife.Data.csproj", "{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyLife.Wasm", "HealthyLife.Wasm\HealthyLife.Wasm.csproj", "{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
