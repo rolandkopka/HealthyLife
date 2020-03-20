@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Domain", "Healt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Data", "HealthyLife.Data\HealthyLife.Data.csproj", "{AD7ED4CB-7F98-443F-981F-F7245BCA9B83}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyLife.Wasm", "HealthyLife.Wasm\HealthyLife.Wasm.csproj", "{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Wasm", "HealthyLife.Wasm\HealthyLife.Wasm.csproj", "{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
