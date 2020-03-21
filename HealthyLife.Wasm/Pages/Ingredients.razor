@@ -1,4 +1,4 @@
-﻿@page "/ingredients"
+﻿@page "/Ingredients"
 @inject HttpClient Http 
 
 <h3>Ingredients</h3>
@@ -15,6 +15,7 @@ else
             <li>@ingredient.Name</li>
         }
     </ol>
+    <NavLink class="btn btn-success" href="CreateIngredient">Add Missing Ingredient</NavLink>
 }
 
 @code {
@@ -22,6 +23,6 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        ingredients = await Http.GetJsonAsync<Ingredient[]>("ingredients");
+        ingredients = await Http.GetJsonAsync<Ingredient[]>("Ingredients");
     }
 }
