@@ -1,15 +1,12 @@
 ﻿@inherits LayoutComponentBase
 
-<div class="sidebar">
-    <NavMenu />
-</div>
-
-<div class="main">
-    <div class="top-row px-4">
-        <a href="http://blazor.net" target="_blank" class="ml-md-auto">About</a>
+<RadzenHeader>
+    <div class="row justify-content-center">
+        <NavMenu />
     </div>
-
-    <div class="content px-4">
+</RadzenHeader>
+<RadzenBody>
+    <RadzenContentContainer Name="main">
         @Body
-    </div>
-</div>
+    </RadzenContentContainer>
+</RadzenBody>
