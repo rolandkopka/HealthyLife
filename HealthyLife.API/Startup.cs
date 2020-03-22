@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using HealthyLife.Data;
+using Microsoft.AspNet.OData.Extensions;
+using Microsoft.OData.Edm;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -30,14 +32,14 @@ namespace HealthyLife.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-
             if (_env.IsDevelopment())
             {
                 services.AddDbContext<FoodContext>(opt =>
                 opt.UseSqlServer(Configuration.GetConnectionString("FoodConnex"))
                    .EnableSensitiveDataLogging());
             }
+            services.AddOData();
+            services.AddControllers(o => o.EnableEndpointRouting = false);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -58,7 +60,8 @@ namespace HealthyLife.API
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.Select().Expand().Filter().OrderBy().MaxTop(100).Count();
+                endpoints.MapODataRoute("ODataRoute", "odata", EdmModelBuilder.GetEdmModel());
             });
         }
     }

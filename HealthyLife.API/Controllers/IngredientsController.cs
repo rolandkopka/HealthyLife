@@ -7,12 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthyLife.Data;
 using HealthyLife.Domain.Food;
+using Microsoft.AspNet.OData;
+using Microsoft.AspNet.OData.Routing;
+using System.Net;
 
 namespace HealthyLife.API.Controllers
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class IngredientsController : ControllerBase
+    [EnableQuery]
+    public class IngredientsController : ODataController
     {
         private readonly FoodContext _context;
 
@@ -21,47 +23,43 @@ namespace HealthyLife.API.Controllers
             _context = context;
         }
 
-        // GET: api/Ingredients
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<Ingredient>>> GetIngredients()
+        // GET: odata/Ingredients
+        public IQueryable<Ingredient> Get()
         {
-            return await _context.Ingredients.ToListAsync();
+            return _context.Ingredients.AsQueryable();
         }
 
-        // GET: api/Ingredients/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Ingredient>> GetIngredient(int id)
+        // GET: odata/Ingredients(5)
+        public SingleResult<Ingredient> Get([FromODataUri] int key)
         {
-            var ingredient = await _context.Ingredients.FindAsync(id);
+            var ingredient = _context.Ingredients.Where(i => i.Id == key);
+            return SingleResult.Create(ingredient);
+        }
 
-            if (ingredient == null)
+        // POST: odata/Ingredients
+        public async Task<IActionResult> Post([FromBody] Ingredient ingredient)
+        {
+            _context.Ingredients.Add(ingredient);
+            await _context.SaveChangesAsync();
+            return Created(ingredient);
+        }
+
+        // PATCH: odata/Ingredients(5)
+        public async Task<IActionResult> Patch([FromODataUri] int key, Delta<Ingredient> ingredient)
+        {
+            var entity = await _context.Ingredients.FindAsync(key);
+            if (entity == null)
             {
                 return NotFound();
             }
-
-            return ingredient;
-        }
-
-        // PUT: api/Ingredients/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutIngredient(int id, Ingredient ingredient)
-        {
-            if (id != ingredient.Id)
-            {
-                return BadRequest();
-            }
-
-            _context.Entry(ingredient).State = EntityState.Modified;
-
+            ingredient.Patch(entity);
             try
             {
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!IngredientExists(id))
+                if (!IngredientExists(key))
                 {
                     return NotFound();
                 }
@@ -70,41 +68,25 @@ namespace HealthyLife.API.Controllers
                     throw;
                 }
             }
-
-            return NoContent();
+            return Updated(entity);
         }
 
-        // POST: api/Ingredients
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see https://aka.ms/RazorPagesCRUD.
-        [HttpPost]
-        public async Task<ActionResult<Ingredient>> PostIngredient(Ingredient ingredient)
+        // DELETE: odata/Ingredients(5)
+        public async Task<IActionResult> Delete([FromODataUri] int key)
         {
-            _context.Ingredients.Add(ingredient);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetIngredient", new { id = ingredient.Id }, ingredient);
-        }
-
-        // DELETE: api/Ingredients/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<Ingredient>> DeleteIngredient(int id)
-        {
-            var ingredient = await _context.Ingredients.FindAsync(id);
+            var ingredient = await _context.Ingredients.FindAsync(key);
             if (ingredient == null)
             {
                 return NotFound();
             }
-
             _context.Ingredients.Remove(ingredient);
             await _context.SaveChangesAsync();
-
-            return ingredient;
+            return NoContent();
         }
 
-        private bool IngredientExists(int id)
+        private bool IngredientExists(int key)
         {
-            return _context.Ingredients.Any(e => e.Id == id);
+            return _context.Ingredients.Any(i => i.Id == key);
         }
     }
 }
