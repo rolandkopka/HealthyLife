@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Text;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using System.Net.Http;
@@ -15,7 +13,7 @@ namespace HealthyLife.Wasm
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddSingleton(s => new HttpClient { BaseAddress = new Uri("https://localhost:5001/api/") });
+            builder.Services.AddSingleton(s => new HttpClient { BaseAddress = new Uri("https://localhost:5001/odata/") });
 
             await builder.Build().RunAsync();
         }

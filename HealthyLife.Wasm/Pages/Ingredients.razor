@@ -1,28 +1,34 @@
 ﻿@page "/Ingredients"
-@inject HttpClient Http 
+@inject HttpClient Http
 
-<h3>Ingredients</h3>
-
-@if (ingredients == null)
-{
-    <p>Loading...</p>
-}
-else
-{
-    <ol>
-        @foreach (var ingredient in ingredients)
-        {
-            <li>@ingredient.Name</li>
-        }
-    </ol>
-    <NavLink class="btn btn-success" href="CreateIngredient">Add Missing Ingredient</NavLink>
-}
-
-@code {
-    private Ingredient[] ingredients;
-
-    protected override async Task OnInitializedAsync()
-    {
-        ingredients = await Http.GetJsonAsync<Ingredient[]>("Ingredients");
-    }
-}
+<RadzenContent Container="main">
+    <RadzenHeading Size="H1" Text="Ingredients"></RadzenHeading>
+    <div class="row">
+        <div class="col-md-12">
+            <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add">
+            </RadzenButton>
+            <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients.AsEnumerable()" TItem="Ingredient">
+                <Columns>
+                    <RadzenGridColumn TItem="Ingredient" Property="Id" Title="Id">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Property="Name" Title="Name">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Property="CaloryIn100G" Title="Calory In 100 G">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Property="CarboHydrateIn100G" Title="Carbo Hydrate In 100 G">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Property="ProteinIn100G" Title="Protein In 100 G">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Property="FatIn100G" Title="Fat In 100 G">
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="Ingredient" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
+                        <Template Context="asdasdModelsHealthyLifeIngredient">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small">
+                            </RadzenButton>
+                        </Template>
+                    </RadzenGridColumn>
+                </Columns>
+            </RadzenGrid>
+        </div>
+    </div>
+</RadzenContent>
