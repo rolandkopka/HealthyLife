@@ -1,8 +1,9 @@
-using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.DependencyInjection;
-using System.Net.Http;
+using HealthyLife.Wasm.Services;
+using Radzen;
+using Serilog;
 
 namespace HealthyLife.Wasm
 {
@@ -10,10 +11,14 @@ namespace HealthyLife.Wasm
     {
         public static async Task Main(string[] args)
         {
+            Log.Logger = new LoggerConfiguration().WriteTo.BrowserConsole().CreateLogger();
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("app");
 
-            builder.Services.AddSingleton(s => new HttpClient { BaseAddress = new Uri("https://localhost:5001/odata/") });
+            builder.Services.AddBaseAddressHttpClient();
+            builder.Services.AddScoped<HealthyLifeOdataApiService>();
+            builder.Services.AddScoped<NotificationService>();
 
             await builder.Build().RunAsync();
         }

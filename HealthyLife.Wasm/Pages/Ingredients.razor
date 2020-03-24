@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add">
             </RadzenButton>
-            <RadzenGrid AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients.AsEnumerable()" TItem="Ingredient">
+            <RadzenGrid Responsive="false" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients" Count="@ingredientCount" TItem="Ingredient" LoadData="@GridLoadData">
                 <Columns>
                     <RadzenGridColumn TItem="Ingredient" Property="Id" Title="Id">
                     </RadzenGridColumn>
