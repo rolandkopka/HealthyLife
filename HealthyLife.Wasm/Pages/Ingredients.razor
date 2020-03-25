@@ -3,32 +3,20 @@
 
 <RadzenContent Container="main">
     <RadzenHeading Size="H1" Text="Ingredients"></RadzenHeading>
-    <div class="row">
         <div class="col-md-12">
-            <RadzenButton Icon="add_circle_outline" style="margin-bottom: 10px" Text="Add">
-            </RadzenButton>
             <RadzenGrid Responsive="false" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients" Count="@ingredientCount" TItem="Ingredient" LoadData="@GridLoadData">
                 <Columns>
-                    <RadzenGridColumn TItem="Ingredient" Property="Id" Title="Id">
+                    <RadzenGridColumn TItem="Ingredient" Property="Name" Title="Ingredient (100g)">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="Name" Title="Name">
+                    <RadzenGridColumn TItem="Ingredient" Property="Calory" Title="Calory (kcal)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="CaloryIn100G" Title="Calory In 100 G">
+                    <RadzenGridColumn TItem="Ingredient" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="CarboHydrateIn100G" Title="Carbo Hydrate In 100 G">
+                    <RadzenGridColumn TItem="Ingredient" Property="Protein" Title="Protein (g)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="ProteinIn100G" Title="Protein In 100 G">
-                    </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="FatIn100G" Title="Fat In 100 G">
-                    </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Filterable="false" Sortable="false" Width="70px" TextAlign="TextAlign.Center">
-                        <Template Context="asdasdModelsHealthyLifeIngredient">
-                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="close" Size="ButtonSize.Small">
-                            </RadzenButton>
-                        </Template>
+                    <RadzenGridColumn TItem="Ingredient" Property="Fat" Title="Fat (g)" Filterable="false">
                     </RadzenGridColumn>
                 </Columns>
             </RadzenGrid>
         </div>
-    </div>
 </RadzenContent>

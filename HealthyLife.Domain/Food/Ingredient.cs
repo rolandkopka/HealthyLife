@@ -7,9 +7,12 @@
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public int CaloryIn100G { get; set; }
-        public double CarboHydrateIn100G { get; set; }
-        public double ProteinIn100G { get; set; }
-        public double FatIn100G { get; set; }
+
+        // Nutritions
+        // Everything is measured in 100 g
+        public int Calory { get; set; } // kcal
+        public double Carbohydrate { get; set; }
+        public double Protein { get; set; }
+        public double Fat { get; set; }
     }
 }
