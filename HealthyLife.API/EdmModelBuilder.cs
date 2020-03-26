@@ -1,5 +1,5 @@
 ﻿using HealthyLife.Data.Entities.Food;
-using HealthyLife.Models;
+using HealthyLife.Models.Food;
 using Microsoft.AspNet.OData.Builder;
 using Microsoft.OData.Edm;
 

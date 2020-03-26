@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace HealthyLife.Models
+namespace HealthyLife.Models.Food
 {
      /// <summary>
-     /// This is raw a ingredient
+     /// This is a raw ingredient
      /// </summary>
     public class IngredientModel
     {

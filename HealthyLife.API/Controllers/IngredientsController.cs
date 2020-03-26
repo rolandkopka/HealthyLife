@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNet.OData;
 using HealthyLife.Data.Entities.Food;
-using HealthyLife.Models;
+using HealthyLife.Models.Food;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using HealthyLife.Data.DbContexts;

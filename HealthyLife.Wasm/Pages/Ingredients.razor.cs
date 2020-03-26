@@ -1,4 +1,4 @@
-﻿using HealthyLife.Models;
+﻿using HealthyLife.Models.Food;
 using HealthyLife.Wasm.Services;
 using Microsoft.AspNetCore.Components;
 using Radzen;

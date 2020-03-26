@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using HealthyLife.Data.Entities.Food;
-using HealthyLife.Models;
+using HealthyLife.Models.Food;
 using System;
 using System.Collections.Generic;
 using System.Text;

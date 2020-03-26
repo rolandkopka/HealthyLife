@@ -1,4 +1,4 @@
-﻿using HealthyLife.Models;
+﻿using HealthyLife.Models.Food;
 using Radzen;
 using System;
 using System.Collections.Generic;
