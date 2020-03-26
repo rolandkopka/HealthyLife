@@ -1,19 +1,14 @@
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using HealthyLife.Data;
 using Microsoft.AspNet.OData.Extensions;
-using Microsoft.OData.Edm;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using AutoMapper;
+using HealthyLife.Data.AutoMapperProfiles;
+using HealthyLife.Data.DbContexts;
 
 namespace HealthyLife.API
 {
@@ -38,6 +33,7 @@ namespace HealthyLife.API
                 opt.UseSqlServer(Configuration.GetConnectionString("FoodConnex"))
                    .EnableSensitiveDataLogging());
             }
+            services.AddAutoMapper(typeof(FoodProfile));
             services.AddOData();
             services.AddControllers(o => o.EnableEndpointRouting = false);
         }

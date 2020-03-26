@@ -1,7 +1,7 @@
-﻿namespace HealthyLife.Domain.Food
+﻿namespace HealthyLife.Data.Entities.Food
 {
     /// <summary>
-    /// This is raw a ingredient
+    /// This is a raw ingredient
     /// </summary>
     public class Ingredient
     {

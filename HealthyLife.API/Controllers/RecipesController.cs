@@ -5,8 +5,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HealthyLife.Data;
-using HealthyLife.Domain.Food;
+using HealthyLife.Data.Entities.Food;
+using HealthyLife.Data.DbContexts;
 
 namespace HealthyLife.API.Controllers
 {

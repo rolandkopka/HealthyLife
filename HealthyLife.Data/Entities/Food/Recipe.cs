@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace HealthyLife.Domain.Food
+namespace HealthyLife.Data.Entities.Food
 {
     public class Recipe
     {

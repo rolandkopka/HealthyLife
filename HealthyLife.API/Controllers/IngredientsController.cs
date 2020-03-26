@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using HealthyLife.Data;
-using HealthyLife.Domain.Food;
 using Microsoft.AspNet.OData;
-using Microsoft.AspNet.OData.Routing;
-using System.Net;
+using HealthyLife.Data.Entities.Food;
+using HealthyLife.Models;
+using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using HealthyLife.Data.DbContexts;
 
 namespace HealthyLife.API.Controllers
 {
@@ -17,42 +15,51 @@ namespace HealthyLife.API.Controllers
     public class IngredientsController : ODataController
     {
         private readonly FoodContext _context;
+        private readonly IMapper _mapper;
 
-        public IngredientsController(FoodContext context)
+        public IngredientsController(FoodContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         // GET: odata/Ingredients
-        public IQueryable<Ingredient> Get()
+        public IQueryable<IngredientModel> Get()
         {
-            return _context.Ingredients.AsQueryable();
+            IQueryable<Ingredient> ingredients = _context.Ingredients.AsQueryable();
+            IQueryable<IngredientModel> ingredientModels = ingredients.ProjectTo<IngredientModel>(_mapper.ConfigurationProvider);
+            return ingredientModels;
         }
 
         // GET: odata/Ingredients(5)
-        public SingleResult<Ingredient> Get([FromODataUri] int key)
+        public SingleResult<IngredientModel> Get([FromODataUri] int key)
         {
-            var ingredient = _context.Ingredients.Where(i => i.Id == key);
-            return SingleResult.Create(ingredient);
+            IQueryable<Ingredient> ingredient = _context.Ingredients.Where(i => i.Id == key);
+            IQueryable<IngredientModel> ingredientModel = ingredient.ProjectTo<IngredientModel>(_mapper.ConfigurationProvider);
+            return SingleResult.Create(ingredientModel);
         }
 
         // POST: odata/Ingredients
-        public async Task<IActionResult> Post([FromBody] Ingredient ingredient)
+        public async Task<IActionResult> Post([FromBody] IngredientModel ingredientModel)
         {
+            var ingredient = _mapper.Map<Ingredient>(ingredientModel);
             _context.Ingredients.Add(ingredient);
             await _context.SaveChangesAsync();
-            return Created(ingredient);
+            _mapper.Map(ingredient, ingredientModel);
+            return Created(ingredientModel);
         }
 
         // PATCH: odata/Ingredients(5)
-        public async Task<IActionResult> Patch([FromODataUri] int key, Delta<Ingredient> ingredient)
+        public async Task<IActionResult> Patch([FromODataUri] int key, Delta<IngredientModel> delta)
         {
-            var entity = await _context.Ingredients.FindAsync(key);
-            if (entity == null)
+            var ingredient = await _context.Ingredients.FindAsync(key);
+            if (ingredient == null)
             {
                 return NotFound();
             }
-            ingredient.Patch(entity);
+            var ingredientModel = _mapper.Map<IngredientModel>(ingredient);
+            delta.Patch(ingredientModel);
+            _mapper.Map(ingredientModel, ingredient);
             try
             {
                 await _context.SaveChangesAsync();
@@ -68,7 +75,7 @@ namespace HealthyLife.API.Controllers
                     throw;
                 }
             }
-            return Updated(entity);
+            return Updated(ingredientModel);
         }
 
         // DELETE: odata/Ingredients(5)

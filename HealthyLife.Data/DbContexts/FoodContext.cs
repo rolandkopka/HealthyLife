@@ -1,8 +1,8 @@
-﻿using HealthyLife.Domain.Food;
+﻿using HealthyLife.Data.Entities.Food;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 
-namespace HealthyLife.Data
+namespace HealthyLife.Data.DbContexts
 {
     public class FoodContext : DbContext
     {
