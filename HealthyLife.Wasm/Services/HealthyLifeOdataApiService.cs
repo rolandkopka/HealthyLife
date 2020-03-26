@@ -1,4 +1,4 @@
-﻿using HealthyLife.Domain.Food;
+﻿using HealthyLife.Models;
 using Radzen;
 using System;
 using System.Collections.Generic;
@@ -19,14 +19,14 @@ namespace HealthyLife.Wasm.Services
             _baseUri = new Uri("https://localhost:5001/odata/");
         }
 
-        public async Task<ODataServiceResult<Ingredient>> GetIngredientsAsync(
+        public async Task<ODataServiceResult<IngredientModel>> GetIngredientsAsync(
             string filter = default, int? top = default, int? skip = default, string orderby = default,
             string expand = default, string select = default, bool? count = default)
         {
             var uri = new Uri(_baseUri, "Ingredients");
             uri = uri.GetODataUri(filter, top, skip, orderby, expand, select, count);
             var response = await _httpClient.GetAsync(uri);
-            return await response.ReadAsync<ODataServiceResult<Ingredient>>();
+            return await response.ReadAsync<ODataServiceResult<IngredientModel>>();
         }
     }
 }

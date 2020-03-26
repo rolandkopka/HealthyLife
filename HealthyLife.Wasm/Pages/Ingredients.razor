@@ -4,17 +4,17 @@
 <RadzenContent Container="main">
     <RadzenHeading Size="H1" Text="Ingredients"></RadzenHeading>
         <div class="col-md-12">
-            <RadzenGrid Responsive="false" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients" Count="@ingredientCount" TItem="Ingredient" LoadData="@GridLoadData">
+            <RadzenGrid Responsive="false" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients" Count="@ingredientCount" TItem="IngredientModel" LoadData="@GridLoadData">
                 <Columns>
-                    <RadzenGridColumn TItem="Ingredient" Property="Name" Title="Ingredient (100g)">
+                    <RadzenGridColumn TItem="IngredientModel" Property="Name" Title="Ingredient (100g)">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="Calory" Title="Calory (kcal)" Filterable="false">
+                    <RadzenGridColumn TItem="IngredientModel" Property="Calory" Title="Calory (kcal)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false">
+                    <RadzenGridColumn TItem="IngredientModel" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="Protein" Title="Protein (g)" Filterable="false">
+                    <RadzenGridColumn TItem="IngredientModel" Property="Protein" Title="Protein (g)" Filterable="false">
                     </RadzenGridColumn>
-                    <RadzenGridColumn TItem="Ingredient" Property="Fat" Title="Fat (g)" Filterable="false">
+                    <RadzenGridColumn TItem="IngredientModel" Property="Fat" Title="Fat (g)" Filterable="false">
                     </RadzenGridColumn>
                 </Columns>
             </RadzenGrid>

@@ -1,4 +1,4 @@
-﻿using HealthyLife.Domain.Food;
+﻿using HealthyLife.Models;
 using HealthyLife.Wasm.Services;
 using Microsoft.AspNetCore.Components;
 using Radzen;
@@ -15,7 +15,7 @@ namespace HealthyLife.Wasm.Pages
         [Inject]
         private NotificationService NotificationService { get; set; }
 
-        private IEnumerable<Ingredient> ingredients;
+        private IEnumerable<IngredientModel> ingredients;
         private int ingredientCount;
 
         protected async Task GridLoadData(LoadDataArgs args)
