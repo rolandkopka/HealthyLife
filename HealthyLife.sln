@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Data", "Healthy
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Wasm", "HealthyLife.Wasm\HealthyLife.Wasm.csproj", "{6F8CF5C7-7A98-4AE6-A9A8-5A877CC18A0A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HealthyLife.Models", "HealthyLife.Models\HealthyLife.Models.csproj", "{60166D4A-BF90-4182-AB62-36EA5F2CAC6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HealthyLife.Models", "HealthyLife.Models\HealthyLife.Models.csproj", "{60166D4A-BF90-4182-AB62-36EA5F2CAC6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

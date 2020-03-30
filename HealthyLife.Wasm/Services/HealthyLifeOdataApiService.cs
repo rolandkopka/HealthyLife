@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace HealthyLife.Wasm.Services
@@ -27,6 +29,14 @@ namespace HealthyLife.Wasm.Services
             uri = uri.GetODataUri(filter, top, skip, orderby, expand, select, count);
             var response = await _httpClient.GetAsync(uri);
             return await response.ReadAsync<ODataServiceResult<IngredientModel>>();
+        }
+
+        public async Task<IngredientModel> CreateIngredientAsync(IngredientModel ingredient)
+        {
+            var uri = new Uri(_baseUri, "Ingredients");
+            var content = new StringContent(ODataJsonSerializer.Serialize(ingredient), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PostAsync(uri, content);
+            return await response.ReadAsync<IngredientModel>();
         }
     }
 }

@@ -1,0 +1,66 @@
+﻿@page "/add-ingredient"
+
+
+<Validations Mode="ValidationMode.Auto" Model="@_ingredient">
+    <Field IsHorizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">Name</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Validation>
+                <TextEdit Placeholder="Name of the ingredient" @bind-Text="@_ingredient.Name">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </TextEdit>
+            </Validation>
+        </FieldBody>
+    </Field>
+    <Field IsHorizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">Calory</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Validation>
+                <NumericEdit TValue="double" @bind-Value="@_ingredient.Calory">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </NumericEdit>
+            </Validation>
+        </FieldBody>
+    </Field>
+    <Field IsHorizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">Carbohydrate</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Validation>
+                <NumericEdit TValue="double" @bind-Value="@_ingredient.Carbohydrate">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </NumericEdit>
+            </Validation>
+        </FieldBody>
+    </Field>
+    <Field IsHorizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">Protein</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Validation>
+                <NumericEdit TValue="double" @bind-Value="@_ingredient.Protein">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </NumericEdit>
+            </Validation>
+        </FieldBody>
+    </Field>
+    <Field IsHorizontal="true">
+        <FieldLabel ColumnSize="ColumnSize.Is2">Fat</FieldLabel>
+        <FieldBody ColumnSize="ColumnSize.Is10">
+            <Validation>
+                <NumericEdit TValue="double" @bind-Value="@_ingredient.Fat">
+                    <Feedback>
+                        <ValidationError />
+                    </Feedback>
+                </NumericEdit>
+            </Validation>
+        </FieldBody>
+    </Field>
+    <Button Color="Color.Primary" Clicked="@FormSubmit">Submit</Button>
+</Validations>

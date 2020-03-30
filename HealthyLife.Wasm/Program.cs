@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using HealthyLife.Wasm.Services;
 using Radzen;
 using Serilog;
+using Blazorise;
+using Blazorise.Bootstrap;
+using Blazorise.Icons.FontAwesome;
 
 namespace HealthyLife.Wasm
 {
@@ -13,14 +16,31 @@ namespace HealthyLife.Wasm
         {
             Log.Logger = new LoggerConfiguration().WriteTo.BrowserConsole().CreateLogger();
 
+
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
-            builder.RootComponents.Add<App>("app");
+
+            builder.Services
+                .AddBlazorise(options => { options.ChangeTextOnKeyPress = true; })
+                .AddBootstrapProviders()
+                .AddFontAwesomeIcons();
 
             builder.Services.AddBaseAddressHttpClient();
+
+            builder.RootComponents.Add<App>("app");
+
             builder.Services.AddScoped<HealthyLifeOdataApiService>();
+
+            builder.Services.AddScoped<DialogService>();
             builder.Services.AddScoped<NotificationService>();
 
-            await builder.Build().RunAsync();
+
+            var host = builder.Build();
+
+            host.Services
+                .UseBootstrapProviders()
+                .UseFontAwesomeIcons();
+
+            await host.RunAsync();
         }
     }
 }
