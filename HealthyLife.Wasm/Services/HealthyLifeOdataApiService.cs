@@ -38,5 +38,11 @@ namespace HealthyLife.Wasm.Services
             var response = await _httpClient.PostAsync(uri, content);
             return await response.ReadAsync<IngredientModel>();
         }
+
+        public async Task<HttpResponseMessage> DeleteIngredientAsync(int id)
+        {
+            var uri = new Uri(_baseUri, $"Ingredients({id})");
+            return await _httpClient.DeleteAsync(uri);
+        }
     }
 }

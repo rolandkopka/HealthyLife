@@ -13,6 +13,11 @@
                     <RadzenGridColumn TItem="IngredientModel" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false" />
                     <RadzenGridColumn TItem="IngredientModel" Property="Protein" Title="Protein (g)" Filterable="false" />
                     <RadzenGridColumn TItem="IngredientModel" Property="Fat" Title="Fat (g)" Filterable="false" />
+                    <RadzenGridColumn TItem="IngredientModel" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
+                        <Template Context="deleteContext">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete_forever" Click="@((args)=>DeleteClick(args, deleteContext))" @onclick:stopPropagation="true" />
+                        </Template>
+                    </RadzenGridColumn>
                 </Columns>
             </RadzenGrid>
         </div>

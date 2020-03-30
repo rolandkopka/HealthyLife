@@ -25,12 +25,6 @@ namespace HealthyLife.Wasm.Pages
         private IEnumerable<IngredientModel> ingredients;
         private int ingredientCount;
 
-        protected async Task AddClick(MouseEventArgs args)
-        {
-            await DialogService.OpenAsync<AddIngredient>("Add Ingredient");
-            _grid.Reload();
-        }
-
         protected async Task GridLoadData(LoadDataArgs args)
         {
             try
@@ -44,6 +38,27 @@ namespace HealthyLife.Wasm.Pages
             catch (Exception)
             {
                 NotificationService.Notify(NotificationSeverity.Error, "Unable to Load Ingredients");
+            }
+        }
+        protected async Task AddClick(MouseEventArgs args)
+        {
+            await DialogService.OpenAsync<AddIngredient>("Add Ingredient");
+            _grid.Reload();
+        }
+
+        protected async Task DeleteClick(MouseEventArgs e, IngredientModel data)
+        {
+            try
+            {
+                var response = await Api.DeleteIngredientAsync(data.Id);
+                if (response != null)
+                {
+                    _grid.Reload();
+                }
+            }
+            catch (Exception)
+            {
+                NotificationService.Notify(NotificationSeverity.Error, "Error", "Unable to delete ingredient");
             }
         }
     }
