@@ -3,14 +3,16 @@ using HealthyLife.Data.DbContexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HealthyLife.Data.Migrations
 {
     [DbContext(typeof(FoodContext))]
-    partial class FoodContextModelSnapshot : ModelSnapshot
+    [Migration("20200330114337_ChangeCalorieType")]
+    partial class ChangeCalorieType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,8 +27,8 @@ namespace HealthyLife.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<double>("Calory")
-                        .HasColumnType("float");
+                    b.Property<int>("Calory")
+                        .HasColumnType("int");
 
                     b.Property<double>("Carbohydrate")
                         .HasColumnType("float");
@@ -48,7 +50,7 @@ namespace HealthyLife.Data.Migrations
                         new
                         {
                             Id = 1,
-                            Calory = 143.0,
+                            Calory = 143,
                             Carbohydrate = 0.69999999999999996,
                             Fat = 9.5,
                             Name = "Large Egg",
@@ -57,7 +59,7 @@ namespace HealthyLife.Data.Migrations
                         new
                         {
                             Id = 2,
-                            Calory = 0.0,
+                            Calory = 0,
                             Carbohydrate = 0.0,
                             Fat = 0.0,
                             Name = "Salt",
