@@ -50,6 +50,7 @@ namespace HealthyLife.API.Controllers
         }
 
         // PATCH: odata/Ingredients(5)
+        [AcceptVerbs("PATCH")]
         public async Task<IActionResult> Patch([FromODataUri] int key, Delta<IngredientModel> delta)
         {
             var ingredient = await _context.Ingredients.FindAsync(key);

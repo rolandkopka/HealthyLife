@@ -8,16 +8,47 @@
             <RadzenButton Icon="add_circle_outline" Style="margin-bottom: 10px" Text="Add" Click="@AddClick" />
             <RadzenGrid @ref="_grid" Responsive="false" AllowFiltering="true" AllowPaging="true" AllowSorting="true" Data="@ingredients" Count="@ingredientCount" TItem="IngredientModel" LoadData="@GridLoadData">
                 <Columns>
-                    <RadzenGridColumn TItem="IngredientModel" Property="Name" Title="Ingredient (100g)" />
-                    <RadzenGridColumn TItem="IngredientModel" Property="Calory" Title="Calory (kcal)" Filterable="false" />
-                    <RadzenGridColumn TItem="IngredientModel" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false" />
-                    <RadzenGridColumn TItem="IngredientModel" Property="Protein" Title="Protein (g)" Filterable="false" />
-                    <RadzenGridColumn TItem="IngredientModel" Property="Fat" Title="Fat (g)" Filterable="false" />
+                    <RadzenGridColumn TItem="IngredientModel" Property="Name" Title="Ingredient (100g)">
+                        <EditTemplate Context="ingredient">
+                            <RadzenTextBox Style="width: 100%" @bind-Value="@ingredient.Name" Name="Name" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="IngredientModel" Property="Calory" Title="Calory (kcal)" Filterable="false">
+                        <EditTemplate Context="ingredient">
+                            <RadzenNumeric Style="width: 100%" @bind-Value="@ingredient.Calory" Name="Calory" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="IngredientModel" Property="Carbohydrate" Title="Carbohydrate (g)" Filterable="false">
+                        <EditTemplate Context="ingredient">
+                            <RadzenNumeric Style="width: 100%" @bind-Value="@ingredient.Carbohydrate" Name="Carbohydrate" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="IngredientModel" Property="Protein" Title="Protein (g)" Filterable="false">
+                        <EditTemplate Context="ingredient">
+                            <RadzenNumeric Style="width: 100%" @bind-Value="@ingredient.Protein" Name="Protein" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
+                    <RadzenGridColumn TItem="IngredientModel" Property="Fat" Title="Fat (g)" Filterable="false">
+                        <EditTemplate Context="ingredient">
+                            <RadzenNumeric Style="width: 100%" @bind-Value="@ingredient.Fat" Name="Fat" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
+
+                    <RadzenGridColumn Context="editContext" TItem="IngredientModel" Bubble="false" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="100px">
+                        <Template Context="ingredient">
+                            <RadzenButton Icon="edit" Click="@(args => EditRowClick(ingredient))" />
+                        </Template>
+                        <EditTemplate Context="ingredient">
+                            <RadzenButton Icon="save" Click="@(args => SaveEditRowClick(ingredient))" />
+                            <RadzenButton Icon="cancel" Click="@(args => CancelEditRowClick(ingredient))" />
+                        </EditTemplate>
+                    </RadzenGridColumn>
                     <RadzenGridColumn TItem="IngredientModel" Filterable="false" Sortable="false" TextAlign="TextAlign.Center" Width="70px">
-                        <Template Context="deleteContext">
-                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete_forever" Click="@((args)=>DeleteClick(args, deleteContext))" @onclick:stopPropagation="true" />
+                        <Template Context="ingredient">
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Icon="delete_forever" Click="@(args => DeleteClick(ingredient))" @onclick:stopPropagation="true" />
                         </Template>
                     </RadzenGridColumn>
+
                 </Columns>
             </RadzenGrid>
         </div>

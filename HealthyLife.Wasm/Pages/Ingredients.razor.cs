@@ -6,6 +6,7 @@ using Radzen;
 using Radzen.Blazor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace HealthyLife.Wasm.Pages
@@ -46,11 +47,11 @@ namespace HealthyLife.Wasm.Pages
             _grid.Reload();
         }
 
-        protected async Task DeleteClick(MouseEventArgs e, IngredientModel data)
+        protected async Task DeleteClick(IngredientModel ingredient)
         {
             try
             {
-                var response = await Api.DeleteIngredientAsync(data.Id);
+                var response = await Api.DeleteIngredientAsync(ingredient.Id);
                 if (response != null)
                 {
                     _grid.Reload();
@@ -60,6 +61,23 @@ namespace HealthyLife.Wasm.Pages
             {
                 NotificationService.Notify(NotificationSeverity.Error, "Error", "Unable to delete ingredient");
             }
+        }
+
+        protected void EditRowClick(IngredientModel ingredient)
+        {
+            _grid.EditRow(ingredient);
+        }
+
+        protected async Task SaveEditRowClick(IngredientModel ingredient)
+        {
+            await _grid.UpdateRow(ingredient);
+            await Api.PatchIngredientAsync(ingredient);
+        }
+
+        protected void CancelEditRowClick(IngredientModel ingredient)
+        {
+            _grid.CancelEditRow(ingredient);
+            _grid.Reload();
         }
     }
 }

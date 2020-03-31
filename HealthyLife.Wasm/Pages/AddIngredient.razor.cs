@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace HealthyLife.Wasm.Pages
 {
-    public partial class AddIngredient
+    public partial class AddIngredient : ComponentBase
     {
         [Inject]
         private HealthyLifeOdataApiService Api { get; set; }

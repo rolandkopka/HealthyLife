@@ -39,6 +39,15 @@ namespace HealthyLife.Wasm.Services
             return await response.ReadAsync<IngredientModel>();
         }
 
+        public async Task<IngredientModel> PatchIngredientAsync(IngredientModel ingredient)
+        {
+            // TODO: Calculate Delta and send only changed properties
+            var uri = new Uri(_baseUri, $"Ingredients({ingredient.Id})");
+            var content = new StringContent(ODataJsonSerializer.Serialize(ingredient), Encoding.UTF8, "application/json");
+            var response = await _httpClient.PatchAsync(uri, content);
+            return await response.ReadAsync<IngredientModel>();
+        }
+
         public async Task<HttpResponseMessage> DeleteIngredientAsync(int id)
         {
             var uri = new Uri(_baseUri, $"Ingredients({id})");
